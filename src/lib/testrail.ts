@@ -9,7 +9,12 @@ export class TestRail {
 
     constructor(private options: TestRailOptions) {
         // compute base url
-        this.base = `https://${options.domain}/index.php`;
+        if (options.path) {
+            this.base = `https://${options.domain}${options.path}/index.php`;
+        }
+        else {
+            this.base = `https://${options.domain}/index.php`;
+        }
     }
 
     private _post(api: String, body: any, callback: Function, error?: Function) {
